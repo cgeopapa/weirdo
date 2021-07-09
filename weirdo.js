@@ -1,25 +1,38 @@
+function getBrowserInfo() {
+    return {
+        "Browser": navigator.appName,
+        "Version": navigator.appVersion,
+        "CodeName": navigator.appCodeName
+    };
+}
+
 async function getLocation() {
     const url = "http://api.ipstack.com/check?access_key=fd08d25dc92185d49eb6a2cfc20db33b";
     let loc;
     await fetch(url)
     .then(data=>{return data.json()})
     .then(res=>{loc = res});
-    return {
-        "Continent": loc.continent_name,
-        "Country": loc.country_name,
-        "Region": loc.region_name,
-        "City": loc.city,
-        "Zip": loc.zip,
-        "Latitude": loc.latitude,
-        "Longitude": loc.longitude,
-    };
+    if (loc.success != undefined) {
+        return "Please disable https only mode";
+    }
+    else {
+        return {
+            "Continent": loc.continent_name,
+            "Country": loc.country_name,
+            "Region": loc.region_name,
+            "City": loc.city,
+            "Zip": loc.zip,
+            "Latitude": loc.latitude,
+            "Longitude": loc.longitude,
+        };
+    }
 }
 
 async function getInfo(){
     await dynamicallyLoadScript();
 
     const info = {
-        "Browser": WURFL.complete_device_name,
+        "Browser": getBrowserInfo(),
         "OS": navigator.platform,
         "UserAgent": navigator.userAgent,
         "GeoLocation": await getLocation(),
@@ -31,6 +44,7 @@ async function getInfo(){
         "Logical CPU cores": navigator.hardwareConcurrency ? navigator.hardwareConcurrency : "Unavailable",
         "Connection": navigator.connection ? navigator.connection : "Unavailable",
         "Device": {
+            "Name": WURFL.complete_device_name,
             "Type": WURFL.form_factor,
             "Mobile": WURFL.is_mobile
         },
