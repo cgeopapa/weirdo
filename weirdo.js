@@ -1,6 +1,3 @@
-console.log(getInfo())
-console.log(navigator)
-
 function getBrowserInfo() {
     return {
         "Browser": navigator.appCodeName,
@@ -12,7 +9,9 @@ function getLocation() {
     return "Will be done"
 }
 
-function getInfo(){
+async function getInfo(){
+    await dynamicallyLoadScript();
+
     const info = {
         "Browser": getBrowserInfo(),
         "OS": navigator.platform,
@@ -31,4 +30,25 @@ function getInfo(){
         },
     };
     return info;
+}
+
+async function dynamicallyLoadScript(url) {
+    try {
+        WURFL;
+    } catch (err) {
+        if (err instanceof ReferenceError) {
+            var script = document.createElement("script");
+            script.src = '//wurfl.io/wurfl.js';
+        
+            document.head.appendChild(script);
+
+            await sleep(1000);
+        }
+    }
+}
+
+async function sleep(ms) {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    })
 }
