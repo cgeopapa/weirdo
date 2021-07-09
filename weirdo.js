@@ -1,6 +1,8 @@
 function getBrowserInfo() {
     return {
-        "Browser": WURFL.complete_device_name
+        "Browser": navigator.appName,
+        "Version": navigator.appVersion,
+        "CodeName": navigator.appCodeName
     };
 }
 
@@ -10,15 +12,20 @@ async function getLocation() {
     await fetch(url)
     .then(data=>{return data.json()})
     .then(res=>{loc = res});
-    return {
-        "Continent": loc.continent_name,
-        "Country": loc.country_name,
-        "Region": loc.region_name,
-        "City": loc.city,
-        "Zip": loc.zip,
-        "Latitude": loc.latitude,
-        "Longitude": loc.longitude,
-    };
+    if (loc.success != undefined) {
+        return "Please disable https only mode";
+    }
+    else {
+        return {
+            "Continent": loc.continent_name,
+            "Country": loc.country_name,
+            "Region": loc.region_name,
+            "City": loc.city,
+            "Zip": loc.zip,
+            "Latitude": loc.latitude,
+            "Longitude": loc.longitude,
+        };
+    }
 }
 
 async function getInfo(){
@@ -37,6 +44,7 @@ async function getInfo(){
         "Logical CPU cores": navigator.hardwareConcurrency ? navigator.hardwareConcurrency : "Unavailable",
         "Connection": navigator.connection ? navigator.connection : "Unavailable",
         "Device": {
+            "Name": WURFL.complete_device_name,
             "Type": WURFL.form_factor,
             "Mobile": WURFL.is_mobile
         },
