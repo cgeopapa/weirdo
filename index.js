@@ -19,3 +19,15 @@ function storeInfo() {
         }
     }
 }
+
+function Start() {
+    displayInfo();
+
+    var jsonViewer = new JSONViewer();
+    fetch("https://webhooks.mongodb-realm.com/api/client/v2.0/app/weirdoinaction-atuuo/service/WeirdoInActionAPI/incoming_webhook/GetInfo?secret=weirdo.jsinaction")
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("allinfo").appendChild(jsonViewer.getContainer());
+        jsonViewer.showJSON(data, -1, -1);
+    })
+}

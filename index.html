@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="json-viewer.css">
     <title>Weirdo in Action</title>
 </head>
-<body onload="displayInfo()">
+<body onload="Start()">
     <div class="d-flex justify-content-center" style="padding: 1rem;">
         <div class="d-flex p-2 flex-column" style="width: 90vw;">
             <div class="card mb-3">
@@ -28,11 +28,17 @@
                     <div id="PostMessage"></div>
                 </div>
             </div>
-            <div class="card md-3">
+            <div class="card mb-3">
                 <div class="card-body">
                     <h2 class="card-title">Your information <code>weirdo.js</code> gathered</h2>
                     <p class="card-text">This is only a preview.</p>
                     <pre class="card-text" id="info"></pre>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">All information that has been stored</h2>
+                    <pre class="card-text" id="allinfo"></pre>
                 </div>
             </div>
         </div>
