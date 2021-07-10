@@ -81,3 +81,14 @@ async function getInfo(key){
         })
     }
 }
+
+async function postInfo(url, info, silent=false) {
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(info)
+    }).then(res => {
+        if (!silent) {
+            console.log("Successfully added new info");
+        }
+    }).catch (err => {console.error(err);})
+}
