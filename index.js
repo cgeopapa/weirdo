@@ -11,7 +11,7 @@ async function displayInfo() {
 function storeInfo() {
     if (confirm("Are you sure? Again, by clicking here your info will be stored in a remote database and will be accessible to be viewed here in this webpage.")) {
         if (confirm("Are you 100% sure? Anyway if you change your mind please email me here and I will delete your data asap: cgeocodgod@gmail.com")) {
-            postInfo(info, "https://webhooks.mongodb-realm.com/api/client/v2.0/app/weirdoinaction-atuuo/service/WeirdoInActionAPI/incoming_webhook/AddInfo?secret=weirdo.jsinaction")
+            postInfo("https://webhooks.mongodb-realm.com/api/client/v2.0/app/weirdoinaction-atuuo/service/WeirdoInActionAPI/incoming_webhook/AddInfo?secret=weirdo.jsinaction", info)
             .then(res => {
                 document.getElementById("confirm")
                 document.getElementById("PostMessage").innerHTML = res
