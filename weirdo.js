@@ -34,9 +34,13 @@ async function getInfo(key){
         let loc;
         await fetch(url)
         .then(data=>{return data.json()})
-        .then(res=>{loc = res});
+        .then(res=>{loc = res})
+        .catch(err=>loc="Unavailable");
         if (loc.success != undefined) {
             return {"Error": loc.error};
+        }
+        else if(loc == "Unavailable") {
+            return loc;
         }
         else {
             return {
