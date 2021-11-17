@@ -1,4 +1,5 @@
-const fs = require('fs-extra')
+const path = require('path');
+const fs = require('fs-extra');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const express = require('express')
@@ -8,16 +9,14 @@ app.use(cors())
 
 const port = 5000;
 
-app.get('/' , (req , res)=>{
-
-   res.send('hello from simple server :)')
-
+app.get('/weirdo' , (req , res)=>{
+    res.sendFile(path.join(__dirname, "/public/weirdo/weirdo.js"), err => console.log(err));
 })
 
 app.post('/info' , (req , res)=>{
     const info = JSON.stringify(JSON.parse(req.body));
 
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const ip = req.socket.remoteAddress;
     const date = new Date();
     const filename = `./testing-range/bodies/${ip}-${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.json`
     fs.outputFile(filename, info, { recursive: true }, function (err) {
