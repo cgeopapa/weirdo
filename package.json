@@ -1,0 +1,24 @@
+{
+  "name": "weird-backend",
+  "version": "1.0.0",
+  "main": "backend.js",
+  "scripts": {
+    "start": "node backend.js",
+    "test": "nodemon backend.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cgeopapa/weirdo.git"
+  },
+  "keywords": [],
+  "author": "cgeopapa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cgeopapa/weirdo/issues"
+  },
+  "homepage": "https://github.com/cgeopapa/weirdo#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
