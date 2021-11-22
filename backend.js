@@ -10,6 +10,10 @@ app.use(cors())
 const port = 5000;
 
 app.get('/weirdo' , (req , res)=>{
+    if(req.headers["if-modified-since"]) {
+        res.setHeader('cached', 'true');
+        res.setHeader('access-control-expose-headers', '*');
+    }
     res.sendFile(path.join(__dirname, "/public/weirdo/weirdo.js"), err => console.log(err));
 })
 
