@@ -18,12 +18,14 @@ app.get('/weirdo' , (req , res)=>{
 })
 
 app.post('/info' , (req , res)=>{
-    const info = JSON.stringify(JSON.parse(req.body));
-
+    const info = JSON.parse(req.body);
     const ip = req.socket.remoteAddress;
     const date = new Date();
+    info.ip = ip;
+    info.date = date;
+    
     const filename = `./testing-range/bodies/${ip}-${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}.json`
-    fs.outputFile(filename, info, { recursive: true }, function (err) {
+    fs.outputFile(filename, JSON.stringify(info), { recursive: true }, function (err) {
         if(err) return console.log(err);
         res.sendStatus(200);
     });
